@@ -3,6 +3,7 @@
 import React, { useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
+import TagManager from "react-gtm-module";
 
 // Types
 interface Post {
@@ -64,6 +65,10 @@ const isBrowser = () => typeof window !== "undefined";
 const Home = () => {
   useEffect(() => {
     console.log(`Running on the ${isBrowser() ? "browser" : "server"}`);
+    const tagManagerArgs = {
+      gtmId: "GTM-KDQ62MMP",
+    };
+    TagManager.initialize(tagManagerArgs);
   }, []);
 
   return (
