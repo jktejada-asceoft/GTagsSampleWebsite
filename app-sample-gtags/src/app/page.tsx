@@ -22,16 +22,13 @@ interface HomeProps {
   ads: Ad[];
 }
 
+const isBrowser = (): boolean => typeof window !== "undefined";
+
 const Home: React.FC<HomeProps> = ({ posts, ads }) => {
   // Debugging: Check if the code is running in the browser
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      console.log("Running in the browser");
-    } else {
-      console.log("Running on the server");
-    }
+    console.log(`Running on the ${isBrowser() ? "browser" : "server"}`);
   }, []);
-
   const samplePosts: Post[] =
     posts && posts.length > 0
       ? posts
