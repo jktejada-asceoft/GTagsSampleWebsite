@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 
-// Define proper types for clarity and safety
+// Types
 interface Post {
   id: number;
   title: string;
@@ -17,15 +17,7 @@ interface Ad {
   link: string;
 }
 
-interface HomeProps {
-  posts: Post[];
-  ads: Ad[];
-}
-
-// Utility function to check for browser environment
-const isBrowser = (): boolean => typeof window !== "undefined";
-
-// Fallback data
+// Static fallback data
 const fallbackPosts: Post[] = [
   {
     id: 1,
@@ -65,13 +57,12 @@ const fallbackAds: Ad[] = [
   },
 ];
 
-const Home: React.FC<HomeProps> = ({ posts, ads }) => {
+const isBrowser = () => typeof window !== "undefined";
+
+const Home = () => {
   useEffect(() => {
     console.log(`Running on the ${isBrowser() ? "browser" : "server"}`);
   }, []);
-
-  const samplePosts = posts.length > 0 ? posts : fallbackPosts;
-  const sampleAds = ads.length > 0 ? ads : fallbackAds;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 text-gray-800">
@@ -109,7 +100,7 @@ const Home: React.FC<HomeProps> = ({ posts, ads }) => {
             Latest Posts
           </h2>
           <ul className="space-y-6">
-            {samplePosts.map((post) => (
+            {fallbackPosts.map((post) => (
               <li
                 key={post.id}
                 className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow"
@@ -128,11 +119,11 @@ const Home: React.FC<HomeProps> = ({ posts, ads }) => {
           </ul>
         </section>
 
-        {/* Sponsored Ads */}
+        {/* Ads */}
         <aside>
           <h2 className="text-3xl font-bold mb-6 text-gray-900">Sponsored</h2>
           <div className="space-y-6">
-            {sampleAds.map((ad) => (
+            {fallbackAds.map((ad) => (
               <a
                 key={ad.id}
                 href={ad.link}
