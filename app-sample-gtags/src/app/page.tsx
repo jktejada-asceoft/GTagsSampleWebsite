@@ -32,6 +32,27 @@ const Home: React.FC<HomeProps> = ({ posts, ads }) => {
     }
   }, []);
 
+  const samplePosts: Post[] =
+    posts && posts.length > 0
+      ? posts
+      : [
+          {
+            id: 1,
+            title: "How to Get Started with React",
+            body: "React is a popular JavaScript library for building user interfaces. In this article, we’ll walk through the basics of setting up a React project and creating your first component...",
+          },
+          {
+            id: 2,
+            title: "10 Tips for Better Web Performance",
+            body: "Web performance is critical for user experience and SEO. In this post, we cover 10 actionable tips to make your websites faster and more efficient...",
+          },
+          {
+            id: 3,
+            title: "Understanding useEffect in Depth",
+            body: "The useEffect hook is one of the most commonly used hooks in React. But how does it really work? In this post, we’ll explore useEffect’s behavior and common patterns...",
+          },
+        ];
+
   const sampleAds: Ad[] =
     ads && ads.length > 0
       ? ads
@@ -101,7 +122,7 @@ const Home: React.FC<HomeProps> = ({ posts, ads }) => {
             Latest Posts
           </h2>
           <ul className="space-y-6">
-            {(posts || []).map((post) => (
+            {samplePosts.map((post) => (
               <li
                 key={post.id}
                 className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow"
