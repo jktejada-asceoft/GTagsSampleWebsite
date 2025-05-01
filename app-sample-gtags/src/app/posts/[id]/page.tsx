@@ -4,6 +4,12 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import React from "react";
 
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
+
 const posts = [
   {
     id: "1",
@@ -78,7 +84,7 @@ Control when effects run using the dependency array.
   },
 ];
 
-export default async function PostPage({ params }: { params: { id: string } }) {
+export default async function PostPage({ params }: PageProps) {
   const post = posts.find((p) => p.id === params.id);
 
   if (!post) return notFound();
