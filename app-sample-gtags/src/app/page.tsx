@@ -1,9 +1,7 @@
 "use client";
 
-import React, { useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import TagManager from "react-gtm-module";
 
 // Types
 interface Post {
@@ -60,44 +58,13 @@ const fallbackAds: Ad[] = [
 
 //Test
 
-const isBrowser = () => typeof window !== "undefined";
-
 const Home = () => {
-  useEffect(() => {
-    console.log(`Running on the ${isBrowser() ? "browser" : "server"}`);
-    const tagManagerArgs = {
-      gtmId: "GTM-KDQ62MMP",
-    };
-    TagManager.initialize(tagManagerArgs);
-  }, []);
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 text-gray-800">
       <Head>
         <title>Sample Blog with Ads</title>
         <meta name="description" content="A modern blog with sponsored ads" />
       </Head>
-
-      {/* Header */}
-      <header className="bg-white shadow sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-4 py-6 flex justify-between items-center">
-          <h1 className="text-4xl font-extrabold text-gray-900">Sample Blog</h1>
-          <nav>
-            <ul className="flex space-x-6">
-              {["Home", "About", "Contact"].map((page) => (
-                <li key={page}>
-                  <Link
-                    href={`/${page === "Home" ? "" : page.toLowerCase()}`}
-                    className="text-gray-700 hover:text-blue-600 font-medium"
-                  >
-                    {page}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-      </header>
 
       {/* Main Content */}
       <main className="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -152,13 +119,6 @@ const Home = () => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-800 py-6 mt-8">
-        <div className="max-w-6xl mx-auto px-4 text-center text-gray-300">
-          <p className="text-sm">
-            &copy; {new Date().getFullYear()} Sample Blog. All rights reserved.
-          </p>
-        </div>
-      </footer>
     </div>
   );
 };
